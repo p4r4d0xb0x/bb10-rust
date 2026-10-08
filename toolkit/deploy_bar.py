@@ -76,6 +76,10 @@ if ARGS.install or ARGS.uninstall:
     if r.returncode != 0:
         print("SCP FAILED:", r.stderr[-400:]); sys.exit(1)
     run("chmod 777 /var/android/deploy.bar; rm -rf /apps/.new.* 2>/dev/null; mkdir -p /var/android")
+    # zombie sud daemons (accumulated `on -d` launches) race-consume job tags
+    # and poison the transaction state -> kill them all before any new job.
+    run("for p in $(pidin ar | grep -E '[s]ud(\\.sh|\\.py)' | awk '{print $1}'); do "
+        "kill -9 $p 2>/dev/null; done; sleep 1; rm -f /dev/shmem/sud_handover")
     if ARGS.uninstall:
         print("uninstall:", job("uninstall"))
         run("rm -rf /apps/.new.* 2>/dev/null")

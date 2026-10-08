@@ -80,10 +80,17 @@ else:
         "AAAAMAAAAOAHAug1AAAAAElFTkSuQmCC")
 
 appdir = f"/apps/{pkg_name}.{pkg_id}/native"
+# Single-instance guard: a swiped-closed Qnx/Elf app is NOT killed by
+# navigator (SDL apps get no SDL_QUIT on close either), so a zombie keeps
+# the window group and the second launch renders nothing / crashes.
+# Kill any previous instance before exec (our own pid isn't exec'd yet).
 wrapper = (f"#!/bin/sh\n"
            f"BASE={appdir}\n"
            f"LD_LIBRARY_PATH=$BASE/lib:{ARGS.libpath_extra}\n"
            f"export LD_LIBRARY_PATH\n"
+           f"for p in $(pidin ar | grep \"native/{ARGS.name}$\" | awk '{{print $1}}'); do\n"
+           f"  kill -9 $p 2>/dev/null\n"
+           f"done\n"
            f"exec $BASE/{ARGS.name}\n").encode()
 
 assets = [
