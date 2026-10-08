@@ -35,6 +35,10 @@ toolkit/
   deploy_bar.py on-device installer via the sudo PPS job queue (no SDK)
   elf/          stripver.py, fixphdr.py, needed_path_to_soname.py
   spec/         target json, linker script, _start asm
+crates/wgd-daemon/ + crates/wgcrypto/  the userspace WireGuard daemon itself
+                                   (static ET_EXEC build, BB10_MODE=static)
+devices/       watchdog script, boot-hook copy, wgd.conf.example — the whole
+               device-side runtime, no longer scattered across tmp dirs
 docs/
   01-toolchain.md   host setup, pulled device libs
   02-pipeline.md    what build.sh actually does, step by step
@@ -49,7 +53,11 @@ examples/
 ## Quickstart
 
 ```sh
-# 0. one-time: pull the link-time libs + SDL runtime from a device (docs/01)
+# 0. one-time: pull the link-time libs + SDL runtime from a device (crates/wgd-daemon/ + crates/wgcrypto/  the userspace WireGuard daemon itself
+                                   (static ET_EXEC build, BB10_MODE=static)
+devices/       watchdog script, boot-hook copy, wgd.conf.example — the whole
+               device-side runtime, no longer scattered across tmp dirs
+docs/01)
 #    libc.so.3, libsocket.so.3 (target pkg), libSDL12.so + libTouchControlOverlay.so
 
 # 1. build (host: rustup nightly + llvm-mc + python3)
@@ -99,4 +107,8 @@ for the full pattern (`sdl_link_prims!()` in the **binary**, then
 
 MIT OR Apache-2.0 for the code in this repository. `libSDL12.so` /
 `libTouchControlOverlay.so` are NOT included — they are runtime files from
-your device (docs/01 explains how to pull them); keep them out of git.
+your device (crates/wgd-daemon/ + crates/wgcrypto/  the userspace WireGuard daemon itself
+                                   (static ET_EXEC build, BB10_MODE=static)
+devices/       watchdog script, boot-hook copy, wgd.conf.example — the whole
+               device-side runtime, no longer scattered across tmp dirs
+docs/01 explains how to pull them); keep them out of git.

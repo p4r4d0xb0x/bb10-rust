@@ -11,9 +11,20 @@ name = "bbui-core"
 version = "0.1.0"
 
 [[package]]
+name = "wgcrypto"
+version = "0.1.0"
+
+[[package]]
 name = "wgd-console"
 version = "1.0.0"
 dependencies = [
  "bb10-sdl",
  "bbui-core",
+]
+
+[[package]]
+name = "wgd-daemon"
+version = "4.0.0"
+dependencies = [
+ "wgcrypto",
 ]

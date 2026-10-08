@@ -2,6 +2,8 @@
 resolver = "2"
 members = [
     "crates/bbui-core",
+    "crates/wgcrypto",
+    "crates/wgd-daemon",
     "crates/bb10-sdl",
     "examples/wgd-console",
 ]

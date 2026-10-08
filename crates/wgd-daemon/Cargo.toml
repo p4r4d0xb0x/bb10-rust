@@ -1,0 +1,19 @@
+[package]
+name = "wgd-daemon"
+version = "4.0.0"
+edition = "2021"
+description = "userspace WireGuard client daemon for BB10 QNX (tun0 + UDP, select loop)"
+license = "MIT OR Apache-2.0"
+
+[[bin]]
+name = "wgd"
+path = "src/main.rs"
+
+[dependencies]
+wgcrypto = { path = "../wgcrypto" }
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
+lto = true
+panic = "abort"

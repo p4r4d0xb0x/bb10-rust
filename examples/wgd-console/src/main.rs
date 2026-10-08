@@ -56,13 +56,13 @@ static mut TOAST: [u8; 40] = [0; 40];
 static mut TOAST_LEN: usize = 0;
 static mut TOAST_T: u64 = 0;
 
-// All shared-docs paths: readable/writable from both devuser (devmode runs)
-// and the per-app sandbox uid. The watchdog writes these files.
-const LOG_PATH: &[u8] = b"/accounts/1000/shared/documents/logs/wgd.log\0";
-const PID_PATH: &[u8] = b"/accounts/1000/shared/documents/wgd_watch.pid\0";
-const CMD_REBIND: &[u8] = b"/accounts/1000/shared/documents/wgcmd_rebind\0";
-const CMD_FT: &[u8] = b"/accounts/1000/shared/documents/wgcmd_ft\0";
-const FT_PATH: &[u8] = b"/accounts/1000/shared/documents/wgd_fulltunnel.on\0";
+// All under /accounts/devuser (world-rwx dir): the single source of truth
+// the watchdog already maintains — no duplicated copies to keep in sync.
+const LOG_PATH: &[u8] = b"/accounts/devuser/wgd.log\0";
+const PID_PATH: &[u8] = b"/accounts/devuser/wgd_watch.pid\0";
+const CMD_REBIND: &[u8] = b"/accounts/devuser/wgcmd_rebind\0";
+const CMD_FT: &[u8] = b"/accounts/devuser/wgcmd_ft\0";
+const FT_PATH: &[u8] = b"/accounts/devuser/wgd_fulltunnel.on\0";
 const BOOT_LOG: &[u8] = b"/accounts/1000/shared/documents/logs/exp_sdl.log\0";
 
 // bring-up log: every step is visible from SSH with zero device-side poking

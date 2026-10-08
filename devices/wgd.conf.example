@@ -1,0 +1,9 @@
+# /accounts/devuser/wgd.conf — loaded by the wgd daemon at launch
+interface
+  private_key = <base64 32B your phone key>
+  address = 10.0.10.8/24
+peer
+  endpoint = <bastion host:port>
+  public_key = <base64 32B server pubkey>
+  psk = <base64 32B pre-shared key>
+  allowed_ips = 0.0.0.0/0
