@@ -1,0 +1,16 @@
+[package]
+name = "bb10-sdl"
+version = "0.1.0"
+edition = "2021"
+description = "no_std bindings to BlackBerry 10's bundled libSDL12.so (PLAYBOOK video driver) — the proven native rendering path on BB10"
+license = "MIT OR Apache-2.0"
+
+[features]
+default = ["stubs"]
+# Export the symbols libSDL12.so / QNX GLES libs import from the executable
+# (frame-info + playbook input callbacks). Disable if you provide your own.
+stubs = []
+
+[lib]
+name = "bb10_sdl"
+path = "src/lib.rs"

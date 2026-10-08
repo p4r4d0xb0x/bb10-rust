@@ -1,0 +1,13 @@
+[package]
+name = "bbui-core"
+version = "0.1.0"
+edition = "2021"
+description = "no_std UI core for BlackBerry 10 (720x720): canvas, bitmap font, hangul, widgets, event model"
+license = "MIT OR Apache-2.0"
+
+[features]
+device = []
+
+[lib]
+name = "bbui_core"
+path = "src/lib.rs"

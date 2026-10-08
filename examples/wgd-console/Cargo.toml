@@ -1,0 +1,20 @@
+[package]
+name = "wgd-console"
+version = "1.0.0"
+edition = "2021"
+description = "Device-proven example: WireGuard daemon console on BB10 Classic via libSDL12 (720x720)"
+license = "MIT OR Apache-2.0"
+publish = false
+
+[[bin]]
+name = "wgd-console"
+path = "src/main.rs"
+
+[dependencies]
+bbui-core = { path = "../../crates/bbui-core" }
+bb10-sdl = { path = "../../crates/bb10-sdl" }
+
+[profile.release]
+opt-level = "s"
+codegen-units = 1
+panic = "abort"

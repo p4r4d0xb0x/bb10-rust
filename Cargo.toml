@@ -1,0 +1,15 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/bbui-core",
+    "crates/bb10-sdl",
+    "examples/wgd-console",
+]
+
+# Device binaries must go through toolkit/build.sh (custom link line),
+# NOT plain `cargo build`. This profile block only keeps `cargo check/test`
+# usable on the host for the pure modules.
+[profile.release]
+opt-level = "s"
+codegen-units = 1
+panic = "abort"

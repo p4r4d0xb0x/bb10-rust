@@ -1,0 +1,21 @@
+{
+  "arch": "arm",
+  "cpu": "cortex-a9",
+  "data-layout": "e-m:e-p:32:32-Fi8-i64:64-v128:64:128-a:0:32-n32-S64",
+  "executables": true,
+  "features": "+strict-align,-neon,-vfp2,-vfp3,-vfp4",
+  "linker": "rust-lld",
+  "linker-flavor": "gnu-lld",
+  "llvm-target": "arm-unknown-none-gnueabi",
+  "max-atomic-width": 32,
+  "os": "none",
+  "abi": "eabi",
+  "llvm-floatabi": "soft",
+  "panic-strategy": "abort",
+  "relocation-model": "pic",
+  "target-c-int-width": 32,
+  "target-endian": "little",
+  "target-pointer-width": 32,
+  "no-default-libraries": true,
+  "crt-objects-fallback": "false"
+}

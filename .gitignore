@@ -1,0 +1,6 @@
+target/
+out/
+dist/
+*.bar
+vendor/
+.DS_Store
