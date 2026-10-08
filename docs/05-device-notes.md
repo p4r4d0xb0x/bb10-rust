@@ -38,6 +38,12 @@ Result appears in the same file as `result::success` /
 Package-Id keeps failing with `500 OSError: [Errno 2]` forever. Remedy:
 uninstall the id first + `rm -rf /apps/.new.*`, or bump Package-Id
 (pack_bar derives ids from content so a rebuild is a new id).
+
+**Zombie sud daemons:** every `on -d /base/usr/sbin/sud.sh` leaves a daemon
+when the job completes/aborts; multiple instances then race-consume new
+job.tags and poison transactions (symptom: `500 OSError` pointing at random
+files under `/apps/.new.*`). deploy_bar.py kills all `[s]ud(.sh|.py)` pids
+before writing a job — do the same in hand-run flows.
 Also note: devmode `true` apps cannot be replaced by `false` manifests —
 the daemon throws ApplicationModeMismatch; uninstall then install.
 
